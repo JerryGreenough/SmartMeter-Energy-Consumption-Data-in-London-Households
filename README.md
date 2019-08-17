@@ -16,5 +16,5 @@ The SmartMeter data has been made available on the following site.
 
 https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households
 
-It is a zip file of size that contains a CSV(comma seperated variable) file with rows of data.
+It is a zip file of size that contains a CSV(comma seperated values) file with rows of data.
 
