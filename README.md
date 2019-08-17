@@ -18,7 +18,16 @@ https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-househol
 
 This site allows the viewer to download a zip file of size 783 MB that contains an 11.3 GB CSV(comma seperated values) file with 167 million rows of data. The CSV file contains measurements of energy consumption in kW-h taken every half hour for each customer over a period of about two years.
 
-The unzipping of the downloaded file can be achieved using standard operating system utilities. However, it can also be undertaken with  Python code by using the ZipFile module. This is illustrated in importEnergyData.py.
+The unzipping of the downloaded file can be achieved using standard operating system utilities. However, it can also be undertaken with  Python code by using the ZipFile module. This is illustrated by the following code taken from importEnergyData.py.
+
+```
+from zipfile import ZipFile 
+        
+    with ZipFile('Power-Networks-LCL-June2015(withAcornGps).zip', 'r') as zip: 
+  
+        print("Extracting the csv file ...") 
+        zip.extractall() 
+```
 
 There is a challenge in cleaning and aggregating the data so that either the total or mean energy usage (taken over all participating customers) can be calculated and thence visualized. Most notably, the sheer size of the data does not lend itself to successful in-memory manipulation using Pandas. Therefore, the first step in processing the data is to split it into 28 separate CSV files, each representing energy consumption data for all registered customers for each month of each year (Nov 2011 - Feb 2014). The Python code required to do this is contained in the top half of the file importEnergyData.py (line 27).
 
