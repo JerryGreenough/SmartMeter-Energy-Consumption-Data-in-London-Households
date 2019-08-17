@@ -31,14 +31,28 @@ from zipfile import ZipFile
 
 There is a challenge in cleaning and aggregating the data so that either the total or mean energy usage (taken over all participating customers) can be calculated and thence visualized. Most notably, the sheer size of the data does not lend itself to successful in-memory manipulation using Pandas. Therefore, the first step in processing the data is to split it into 28 separate CSV files, each representing energy consumption data for all registered customers for each month of each year (Nov 2011 - Feb 2014). The Python code required to do this is contained in the top half of the file importEnergyData.py (line 27).
 
-## Data Cleaning and Aggregation
+## Data Cleaning
 
 Once the data has been split into bit-size pieces, the next challenge is to clean the data. The Python code required to do this is contained in the file cleanAndProcessEnergyData.py, which contains an eponymous function that accepts one of the 28 uncleaned and unaggregated monthly CSV files and outputs a cleaned and aggregated version that can then be used for additional calculations and/or visualization.
 
 The data cleaning operations include:
-* Dropping rows that contain NaN values
+* Dropping rows that contain null and NaN values
 * Eliminating duplicate rows (corresponding to duplicate SmartMeter reports)
 * Elimination of Time-of-Use data.
 
 Time-of-Use metering entails the employment of an array of energy rates based on the time of day in which the energy is being consumed. It is elminated in order to prevent the time-dependent energy tariff from influencing the fundamental daily trends shown by the energy consumption data.
+
+## Data Aggregation
+
+The remainder of the Python code contained in ```cleanAndProcessEnergyData.py``` is devoted to grouping energy consumption records by timestamp in order to calculate the total and mean energy consumption (per timestamp) over all customers for any given day.
+
+Dedicated columns are created in the dataframe to represent the year, month
+
+```
+    xdf.insert(0, 'year',  xdf.index.map(lambda row: int(row[0:4])))
+    xdf.insert(0, 'month', xdf.index.map(lambda row: int(row[5:7])))
+    xdf.insert(0, 'day',   xdf.index.map(lambda row: int(row[8:10])))
+```
+    xdf.insert(0, 'time',  xdf.index.map(lambda row: row[11:16]))
+
 
