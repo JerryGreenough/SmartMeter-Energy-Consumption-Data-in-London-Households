@@ -49,10 +49,10 @@ The remainder of the Python code contained in ```cleanAndProcessEnergyData.py```
 Dedicated columns are created in the dataframe to represent the year, month
 
 ```
-    xdf.insert(0, 'year',  xdf.index.map(lambda row: int(row[0:4])))
-    xdf.insert(0, 'month', xdf.index.map(lambda row: int(row[5:7])))
-    xdf.insert(0, 'day',   xdf.index.map(lambda row: int(row[8:10])))
+xdf.insert(0, 'year',  xdf.index.map(lambda row: int(row[0:4])))
+xdf.insert(0, 'month', xdf.index.map(lambda row: int(row[5:7])))
+xdf.insert(0, 'day',   xdf.index.map(lambda row: int(row[8:10])))
+xdf.insert(0, 'time',  xdf.index.map(lambda row: row[11:16]))
 ```
-    xdf.insert(0, 'time',  xdf.index.map(lambda row: row[11:16]))
 
 
