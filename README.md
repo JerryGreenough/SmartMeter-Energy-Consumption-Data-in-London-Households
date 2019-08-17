@@ -1,6 +1,6 @@
 # SmartMeter Energy Consumption in London Households
 
-This project demonstrates how Python was used in the processing and visualization of SmartMeter Energy Consumption Data from the Low Carbon London project. The majority of the data processing makes use of the Pandas module. The visualization is undertaken with multi-line plots created using the Matplotlib module.
+This project demonstrates how Python was used in the processing and visualization of SmartMeter Energy Consumption Data from the Low Carbon London project. The majority of the data processing makes use of the Pandas module. The visualization is undertaken with multi-line plots created using the Matplotlib module. The project was initiated by and undertaken with Michael Blackmon (https://www.linkedin.com/in/michael-blackmon-b4431263).
 
 The Low Carbon London project was led by UK Power Networks, a company that owns and maintains electricity cables and lines across London, the South East and East of England. As part of the LCL project, energy consumption readings were taken for a sample of 5,567 London Households between November 2011 and February 2014.
 
@@ -33,11 +33,12 @@ There is a challenge in cleaning and aggregating the data so that either the tot
 
 ## Data Cleaning and Aggregation
 
-Once the data has been split into bit-size pieces, the next challenge is to clean the data. The Python code required to do this is contained in the file cleanAndProcessEnergyData.py, which contains an eponymous function that accepts one of the 28 uncleaned and unaggregated monthly CSV files and outputs a cleaned and aggregated version that can then be used for additional calculations and/or visualization.
+Once the data has been split into bit-size pieces, the next challenge is to clean the data. The Python code required to do this is contained in the file [cleanAndProcessEnergyData.py], which contains an eponymous function that accepts one of the 28 uncleaned and unaggregated monthly CSV files and outputs a cleaned and aggregated version that can then be used for additional calculations and/or visualization.
 
 The data cleaning operations include:
 * Dropping rows that contain NaN values
 * Eliminating duplicate rows (corresponding to duplicate SmartMeter reports)
-* Elimination of Time of Use data.
+* Elimination of Time-of-Use data.
 
+Time-of-Use metering entails the employment of an array of energy rates based on the time of day in which the energy is being consumed. it is elminated in order to prevent the time-dependent energy tariff from influencing the fundamental daily trends shown by the energy consumption data.
 
