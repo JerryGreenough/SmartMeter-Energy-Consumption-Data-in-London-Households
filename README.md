@@ -10,11 +10,11 @@ The line plot shown below demonstrates typical graphical output that can be gene
 
 The summer months (April through July) demonstrate a tendency for the peak of the energy consumption to occur at approximately the same time as sunset (data available from http://www.timeanddate.com). However, the same trend cannot be observed as strongly for the winter months (January through March), which all peak at roughly the same time stamp (19:15). Sunset for the winter months takes place much earlier in the day. It is conjectured that electrical draws associated with heating and cooking are less subject to time variation during the winter months and might explain the lack of variability in the time stamp of the peak energy consumption.
 
-Data Source
+## Data Source
 
 The SmartMeter data has been made available on the following site.
 
 https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households
 
-It is a zip file of size that contains a CSV(comma seperated values) file with rows of data.
+It is a zip file of size that contains a 10 GB CSV(comma seperated values) file with 167 million rows of data.
 
