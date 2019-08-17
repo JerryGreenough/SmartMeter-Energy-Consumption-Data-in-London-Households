@@ -46,9 +46,10 @@ Time-of-Use metering entails the employment of an array of energy rates based on
 
 The remainder of the Python code contained in ```cleanAndProcessEnergyData.py``` is devoted to grouping energy consumption records by timestamp in order to calculate the total and mean energy consumption (per timestamp) over all customers for any given day.
 
-Dedicated columns are created in the dataframe to represent the year, month
+Dedicated columns are created in the dataframe to represent the year, month, day and time of a particular record in order to
+facilitate selection during visualization.
 
-```
+```python
 xdf.insert(0, 'year',  xdf.index.map(lambda row: int(row[0:4])))
 xdf.insert(0, 'month', xdf.index.map(lambda row: int(row[5:7])))
 xdf.insert(0, 'day',   xdf.index.map(lambda row: int(row[8:10])))
