@@ -18,9 +18,9 @@ https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-househol
 
 This site allows the viewer to download a zip file of size 783 MB that contains an 11.3 GB CSV(comma seperated values) file with 167 million rows of data. The CSV file contains measurements of energy consumption in kW-h taken every half hour for each customer over a period of about two years.
 
-The unzipping of the downloaded file can be achieved using standard operating system utilities. However, it can also be undertaken with  Python code by using the ZipFile module. This is illustrated by the following code taken from importEnergyData.py.
+The unzipping of the downloaded file can be achieved using standard operating system utilities. However, it can also be undertaken with  Python code by using the ZipFile module. This is illustrated by the following code taken from ```importEnergyData.py```.
 
-```
+```python
 from zipfile import ZipFile 
         
     with ZipFile('Power-Networks-LCL-June2015(withAcornGps).zip', 'r') as zip: 
@@ -29,11 +29,11 @@ from zipfile import ZipFile
         zip.extractall() 
 ```
 
-There is a challenge in cleaning and aggregating the data so that either the total or mean energy usage (taken over all participating customers) can be calculated and thence visualized. Most notably, the sheer size of the data does not lend itself to successful in-memory manipulation using Pandas. Therefore, the first step in processing the data is to split it into 28 separate CSV files, each representing energy consumption data for all registered customers for each month of each year (Nov 2011 - Feb 2014). The Python code required to do this is contained in the top half of the file importEnergyData.py (line 27).
+There is a challenge in cleaning and aggregating the data so that either the total or mean energy usage (taken over all participating customers) can be calculated and thence visualized. Most notably, the sheer size of the data does not lend itself to successful in-memory manipulation using Pandas. Therefore, the first step in processing the data is to split it into 28 separate CSV files, each representing energy consumption data for all registered customers for each month of each year (Nov 2011 - Feb 2014). The Python code required to do this is contained in the top half of the file ```importEnergyData.py``` (line 27).
 
 ## Data Cleaning
 
-Once the data has been split into bit-size pieces, the next challenge is to clean the data. The Python code required to do this is contained in the file cleanAndProcessEnergyData.py, which contains an eponymous function that accepts one of the 28 uncleaned and unaggregated monthly CSV files and outputs a cleaned and aggregated version that can then be used for additional calculations and/or visualization.
+Once the data has been split into bit-size pieces, the next challenge is to clean the data. The Python code required to do this is contained in the file ```cleanAndProcessEnergyData.py```, which contains an eponymous function that accepts one of the 28 uncleaned and unaggregated monthly CSV files and outputs a cleaned and aggregated version that can then be used for additional calculations and/or visualization.
 
 The data cleaning operations include:
 * Dropping rows that contain null and NaN values
@@ -46,14 +46,6 @@ Time-of-Use metering entails the employment of an array of energy rates based on
 
 The remainder of the Python code contained in ```cleanAndProcessEnergyData.py``` is devoted to grouping energy consumption records by timestamp in order to calculate the total and mean energy consumption (per timestamp) over all customers for any given day.
 
-Dedicated columns are created in the dataframe to represent the year, month, day and time of a particular record in order to
-facilitate selection during visualization.
 
-```python
-xdf.insert(0, 'year',  xdf.index.map(lambda row: int(row[0:4])))
-xdf.insert(0, 'month', xdf.index.map(lambda row: int(row[5:7])))
-xdf.insert(0, 'day',   xdf.index.map(lambda row: int(row[8:10])))
-xdf.insert(0, 'time',  xdf.index.map(lambda row: row[11:16]))
-```
 
 
