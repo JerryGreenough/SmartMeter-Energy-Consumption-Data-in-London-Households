@@ -36,8 +36,8 @@ There is a challenge in cleaning and aggregating the data so that either the tot
 Once the data has been split into bit-size pieces, the next challenge is to clean the data. The Python code required to do this is contained in the file cleanAndProcessEnergyData.py, which contains an eponymous function that accepts one of the 28 uncleaned and unaggregated monthly CSV files and outputs a cleaned and aggregated version that can then be used for additional calculations and/or visualization.
 
 The data cleaning operations include:
-. Dropping rows that contain NaN values
-. Eliminating duplicate rows (corresponding to duplicate SmartMeter reports)
-. Elimination of Time of Use data.
+* Dropping rows that contain NaN values
+* Eliminating duplicate rows (corresponding to duplicate SmartMeter reports)
+* Elimination of Time of Use data.
 
 
