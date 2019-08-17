@@ -40,5 +40,5 @@ The data cleaning operations include:
 * Eliminating duplicate rows (corresponding to duplicate SmartMeter reports)
 * Elimination of Time-of-Use data.
 
-Time-of-Use metering entails the employment of an array of energy rates based on the time of day in which the energy is being consumed. it is elminated in order to prevent the time-dependent energy tariff from influencing the fundamental daily trends shown by the energy consumption data.
+Time-of-Use metering entails the employment of an array of energy rates based on the time of day in which the energy is being consumed. It is elminated in order to prevent the time-dependent energy tariff from influencing the fundamental daily trends shown by the energy consumption data.
 
