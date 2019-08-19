@@ -5,11 +5,12 @@ def cleanAndProcessEnergyData(infile, outfile):
     
     from numpy import NaN
     
-    xdf = pd.read_csv(infile, header = None, low_memory=False)
+    xdf = pd.read_csv(infile, header = None, low_memory=False, \
+         names = ["user", "tariff", "time", "energy", "acorn group", "prosperity group"])
     
     # Filter out the time-of-use customers.
     
-    xdf = xdf[xdf[1]=='Std']
+    xdf = xdf[xdf["tariff"]=='Std']
     
     # Replace any string "Null" values with NaN, so that dropna will
     # remove the affected lines.
@@ -23,15 +24,15 @@ def cleanAndProcessEnergyData(infile, outfile):
     # Remove any duplicates, using columns 0 through 3 for the identification of
     # duplicates.
     
-    xdf.drop_duplicates([0, 1, 2, 3], inplace = True, keep = 'last')
+    xdf.drop_duplicates(["user", "time", "energy", "acorn group"], inplace = True, keep = 'last')
     
     # The following ensures data consistency in the energy consumption column.
     
-    xdf[3] = xdf[3].astype(float)
+    xdf["energy"] = xdf["energy"].astype(float)
     
     # Construct a pivot table for the sums.
     
-    xdf1 = pd.pivot_table(xdf, values=[3], index=[2], columns=[5], \
+    xdf1 = pd.pivot_table(xdf, values=["energy"], index=["time"], columns=["prosperity group"], \
                          aggfunc= np.sum, fill_value = 0.0)
     xdf1.columns = [aa[1] for aa in xdf1.columns]
     xdf1["total"] = xdf1.sum(axis = 1)
@@ -39,7 +40,7 @@ def cleanAndProcessEnergyData(infile, outfile):
     # Construct a pivot table for the counts.
     # fill_value = 1 helps us to avoid a divide by zero error.
     
-    xdf2 = pd.pivot_table(xdf, values=[3], index=[2], columns=[5], \
+    xdf2 = pd.pivot_table(xdf, values=["energy"], index=["time"], columns=["prosperity group"], \
                          aggfunc= len, fill_value = 1)
     xdf2.columns = [aa[1] for aa in xdf2.columns]
     xdf2["total"] = xdf2.sum(axis = 1)
@@ -76,3 +77,4 @@ def cleanAndProcessEnergyData(infile, outfile):
     xdf.fillna(value = 0.0, inplace = True)
     
     xdf.to_csv(outfile)    
+
