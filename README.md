@@ -46,6 +46,27 @@ Time-of-Use metering entails the employment of an array of energy rates based on
 
 The remainder of the Python code contained in ```cleanAndProcessEnergyData.py``` is devoted to grouping energy consumption records by timestamp in order to calculate the total and mean energy consumption (per timestamp) over all customers for any given day.
 
+An elegant way to this is to use a Pandas pivot table to collect energy sums and measurement counts based on grouping the meter reports by both timestamp and prosperity group. The pivot table is a two-dimensional equivalent to the Pandas groupby functionality.
+
+```Python
+# Construct a pivot table for the sums.
+# fill_value = 0.0 provides for a meaningful value to be inserted for the case in which 
+# no measurement reports are made for a particular grouping.
+
+xdf1 = pd.pivot_table(xdf, values=["energy"], index=["time"], columns=["prosperity group"], \
+                         aggfunc= np.sum, fill_value = 0.0)
+xdf1["total"] = xdf1.sum(axis = 1)
+
+# Construct a pivot table for the counts.
+# fill_value = 1 helps us to avoid a divide by zero error for the case in which no measuremet
+# reports are made for a particular grouping.
+
+xdf2 = pd.pivot_table(xdf, values=["energy"], index=["time"], columns=["prosperity group"], \
+                         aggfunc= len, fill_value = 1)
+xdf2["total"] = xdf2.sum(axis = 1)
+```
+It is a straightforward to perform a calculation of mean usage at a given time point (i) for all customers within a specific prosperity group as well as for the totality of customers over all prosperity groups.
+
 
 
 
