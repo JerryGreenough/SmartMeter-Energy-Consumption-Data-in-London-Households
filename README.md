@@ -73,7 +73,7 @@ With the use of standard Pandas column operations, it is a straightforward task 
 
 The data cleaning and aggregation operations result in the creation of 28 CSV files, each of which is labeled by month and year. For example, the CSV file containing data for July 2013 is ```data_201307_proc.csv```.  Each file contains total and mean energy consumption taken over all the customers for timestamps taken every half hour in a given month.
 
-The list of all files that are produced in this way is given in another CSV file called ```fileList.csv```. This CSV file also contains 'year' and 'month' integer fields associated with each file. It can be imported into a dataframe in order to facilitate an analysis that loops over a number of months.
+The list of all files that are produced in this way is given in another CSV file called ```fileList.csv```, which is created during the execution of ```importEnergyData.py```. This CSV file also contains 'year' and 'month' integer fields associated with each file. It can be imported into a dataframe in order to facilitate an analysis that loops over a number of months.
 
 ```
 dfsfile = pd.read_csv("./fileList.csv")
@@ -87,8 +87,11 @@ df012013 = pd.read_csv(fname)
 df012013_ave = df012013.groupby(["time"]).mean()
 df012013_ave.reset_index(inplace = True)
 ```
+The code snippet above is taken from ```monthlyAnalysis.py``` which calculates average energy consumptions for the first seven months of 2013 in preparation for data vizualization in the form the multi-line plot seen at the beginning of this readme.
 
 ## Monthly Visualization
+
+
 
 
 
