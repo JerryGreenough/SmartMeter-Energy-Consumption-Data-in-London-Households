@@ -16,7 +16,9 @@ The SmartMeter data has been made available on the following site.
 
 https://data.london.gov.uk/dataset/smartmeter-energy-use-data-in-london-households
 
-This site allows the viewer to download a zip file of size 783 MB that contains an 11.3 GB CSV(comma seperated values) file with 167 million rows of data. The CSV file contains measurements of energy consumption in kW-h taken every half hour for each customer over a period of about two years.
+This site allows the viewer to download a zip file of size 783 MB that contains an 11.3 GB CSV(comma seperated values) file with 167 million rows of data. The CSV file contains measurements of energy consumption in kW-h taken every half hour for each customer over a period of about two years. Furthermore, each customer is assigned an Acorn designation and a prosperity categor based on the Acorn designation. 
+
+Acorn (developed by CACI Ltd in the UK) segments UK postcodes and neighborhoods into 6 Categories, 18 Groups and 62 types, three of which are not private households. By analyzing significant social factors and population behavior, it provides precise information and in-depth understanding of the different types of people (https://en.wikipedia.org/wiki/Acorn_(demographics)).
 
 The unzipping of the downloaded file can be achieved using standard operating system utilities. However, it can also be undertaken with  Python code by using the ZipFile module. This is illustrated by the following code taken from ```importEnergyData.py```.
 
