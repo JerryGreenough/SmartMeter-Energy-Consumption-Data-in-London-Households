@@ -65,7 +65,11 @@ xdf2 = pd.pivot_table(xdf, values=["energy"], index=["time"], columns=["prosperi
                          aggfunc= len, fill_value = 1)
 xdf2["total"] = xdf2.sum(axis = 1)
 ```
-It is a straightforward to perform a calculation of mean usage at a given time point (i) for all customers within a specific prosperity group as well as for the totality of customers over all prosperity groups.
+The sum of the energy sums and their associated counts are also calculated in each respective Pandas dataframe. The ```axis=1``` argument ensures that summation is peformed across the columns for any given row. The two tables are subsequently inner-joined in order for mean energy usage to be calculated. The join operation is performed on equivalence of the index column of each dataframe using the Pandas dataframe ```.join``` function.
+
+It is now a straightforward to perform a calculation of mean usage at a given time point (i) for all customers within a specific prosperity group and (ii) for the totality of customers over all prosperity groups. 
+
+
 
 
 
