@@ -69,14 +69,18 @@ The sum of the energy sums and their associated counts are also calculated in ea
 
 With the use of standard Pandas column operations, it is a straightforward task to perform a calculation of mean usage at a given time point (i) for all customers within a specific prosperity group and (ii) for the totality of customers over all prosperity groups. 
 
-## Energy consumption for a given month
+## Average energy consumption for a given month
 
-The data cleaning and aggregation operations result in the creation of 28 CSV files, each of which is labeled by month and year. For example, the CSV file containing data for July 2013 is ```data_201307_proc.csv```. The list of all files that are produced in this way is given in another CSV file called ```fileList.csv```. This CSV file also conatins 'year' and 'month' integer fields. It can be imported into a dataframe in order to facilitate an analysis that loops over a number of months.
+The data cleaning and aggregation operations result in the creation of 28 CSV files, each of which is labeled by month and year. For example, the CSV file containing data for July 2013 is ```data_201307_proc.csv```.  Each file contains total and mean energy consumption taken over all the customers for timestamps taken every half hour in a given month.
+
+The list of all files that are produced in this way is given in another CSV file called ```fileList.csv```. This CSV file also contains 'year' and 'month' integer fields associated with each file. It can be imported into a dataframe in order to facilitate an analysis that loops over a number of months.
 
 ```
 dfsfile = pd.read_csv("./fileList.csv")
 fname = dfsfile[(dfsfile["month"]==1) & (dfsfile["year"]==2013)]["processed"].iloc[0]
 ```
+
+The following example demonstrates the calculation of the average of the mean energy consumptions at a given time of day, where the average is taken over all days during January 2013.
 
 ```
 df012013 = pd.read_csv(fname)
