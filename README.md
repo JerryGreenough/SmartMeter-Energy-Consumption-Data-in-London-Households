@@ -87,9 +87,23 @@ df012013 = pd.read_csv(fname)
 df012013_ave = df012013.groupby(["time"]).mean()
 df012013_ave.reset_index(inplace = True)
 ```
-The code snippet above is taken from ```monthlyAnalysis.py``` which calculates average energy consumptions for the first seven months of 2013 in preparation for data vizualization in the form the multi-line plot seen at the beginning of this readme.
+The code snippet above is taken from ```monthlyAnalysis.py``` which calculates average energy consumptions for the first seven months of 2013 in preparation for data vizualization in the form of the multi-line plot seen at the beginning of this readme.
 
 ## Monthly Visualization
+
+The execution of ```monthlyAnalysis.py``` produces seven dataframes, each corresponding to one the first seven months of 2013. A multiline plot can depict the averge energy consumption at various points of the day for each of the featured months. This is achieved with the help of another Python function ```multiEventPlotter(...)```, which takes as input a list of dataframes and plots a quantity of interest vs. timestamp for each of the featured dataframes, together with user-specified labels.
+
+The following code demonstrates how this is done for the case of monthly average energy consumption for the first seven months of 2013.
+
+```
+labs = ["2013-01", "2013-02", "2013-03", "2013-04", "2013-05", "2013-06", "2013-07"]
+dflist = [df012013_ave, df022013_ave, df032013_ave, df042013_ave, df052013_ave, df062013_ave, df072013_ave]
+multiEventPlotter(dflist, "Average Monthly Energy Consumption", col = "mean", labels = labs)
+```
+
+The ```multiEventPlotter(...)``` function uses basic plotting and labeling functions from Matplotlib.
+
+
 
 
 
