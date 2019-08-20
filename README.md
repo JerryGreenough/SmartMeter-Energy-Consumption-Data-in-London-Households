@@ -75,14 +75,14 @@ The data cleaning and aggregation operations result in the creation of 28 CSV fi
 
 The list of all files that are produced in this way is given in another CSV file called ```fileList.csv```, which is created during the execution of ```importEnergyData.py```. This CSV file also contains 'year' and 'month' integer fields associated with each file. It can be imported into a dataframe in order to facilitate an analysis that loops over a number of months.
 
-```
+```Python
 dfsfile = pd.read_csv("./fileList.csv")
 fname = dfsfile[(dfsfile["month"]==1) & (dfsfile["year"]==2013)]["processed"].iloc[0]
 ```
 
 The following example demonstrates the calculation of the average of the mean energy consumptions at a given time of day, where the average is taken over all days during January 2013.
 
-```
+```Python
 df012013 = pd.read_csv(fname)
 df012013_ave = df012013.groupby(["time"]).mean()
 df012013_ave.reset_index(inplace = True)
@@ -95,7 +95,7 @@ The execution of ```monthlyAnalysis.py``` produces seven dataframes, each corres
 
 The following code demonstrates how this is done for the case of monthly average energy consumption for the first seven months of 2013.
 
-```
+```Python
 labs = ["2013-01", "2013-02", "2013-03", "2013-04", "2013-05", "2013-06", "2013-07"]
 dflist = [df012013_ave, df022013_ave, df032013_ave, df042013_ave, df052013_ave, df062013_ave, df072013_ave]
 multiEventPlotter(dflist, "Average Monthly Energy Consumption", col = "mean", labels = labs)
